@@ -82,11 +82,3 @@ lint/tmp/
 
 .DS_Store
 /.idea
-
-# Project exclude paths
-/.github/
-/doc/
-/FtcRobotController/
-/gradle/
-/libs/
-/TeamCode/
