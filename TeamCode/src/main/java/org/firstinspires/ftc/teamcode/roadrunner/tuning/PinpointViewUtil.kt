@@ -20,7 +20,7 @@ fun makePinpointView(pl: PinpointLocalizer): PinpointView = object : PinpointVie
 
     private fun Double.applyDirection(dir: EncoderDirection): Double = when (dir) {
         EncoderDirection.FORWARD -> this
-        EncoderDirection.REVERSED -> -this
+        EncoderDirection.REVERSED -> this
     }
 
     private var parVelEstimate = RollingThreeMedian()
