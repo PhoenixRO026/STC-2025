@@ -1,0 +1,6 @@
+intakeUp = 0.2539
+intakeDown = 0.6624
+boxUp = 0.1896
+boxDown = 0.4929
+clawClosed = 0.429
+clawOpened = 0.8255

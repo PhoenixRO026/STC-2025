@@ -22,7 +22,7 @@ fun main() {
             .build()
 
     myBot.runAction(myBot.drive.actionBuilder(Pose2d(10.inch, -60.inch, 90.deg).pose2d).ex()
-            .lineToY(10.inch)
+            .lineToY(80.inch)
             .build())
 
     meepMeep.setBackground(MeepMeep.Background.FIELD_INTO_THE_DEEP_JUICE_DARK)
