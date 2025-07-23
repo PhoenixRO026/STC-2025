@@ -271,8 +271,13 @@ public final class MecanumDrive {
         private double beginTs = -1;
 
         private final double[] xPoints, yPoints;
+        private final double correctionTimeSec;
 
         public FollowTrajectoryAction(TimeTrajectory t) {
+            this(t, 0.0);
+        }
+
+        public FollowTrajectoryAction(TimeTrajectory t, double correctionTimeSec) {
             timeTrajectory = t;
 
             List<Double> disps = com.acmerobotics.roadrunner.Math.range(
@@ -285,6 +290,8 @@ public final class MecanumDrive {
                 xPoints[i] = p.position.x;
                 yPoints[i] = p.position.y;
             }
+
+            this.correctionTimeSec = correctionTimeSec;
         }
 
         @Override
@@ -481,9 +488,13 @@ public final class MecanumDrive {
     }
 
     public TrajectoryActionBuilder actionBuilder(Pose2d beginPose) {
+        return actionBuilder(beginPose, 0.0);
+    }
+
+    public TrajectoryActionBuilder actionBuilder(Pose2d beginPose, double correctionTimeSec) {
         return new TrajectoryActionBuilder(
                 TurnAction::new,
-                FollowTrajectoryAction::new,
+                (timeTrajectory) -> new FollowTrajectoryAction(timeTrajectory, correctionTimeSec),
                 new TrajectoryBuilderParams(
                         1e-6,
                         new ProfileParams(
