@@ -4,3 +4,12 @@ boxUp = 0.1896
 boxDown = 0.4929
 clawClosed = 0.429
 clawOpened = 0.8255
+normalWirst = 0.7839
+flippedWrist = 0.2314
+Box intake: arm = 0.7426, elbow = 0.0997
+
+Maxim elbow = 0.9495
+Minim elbow = 0.0353
+
+Specimen place: arm = 0.6778, elbow = 0.2877
+Specimen place 1: arm = 0.6425, elbow = 0.8284
