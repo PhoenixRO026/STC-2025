@@ -49,11 +49,6 @@ class Robot(
         drive.updatePoseEstimate()
     }
 
-    fun sampleToBasket() = SequentialAction(
-        lift.liftToBasketAction(),
-        outtake.armToBasketAction()
-    )
-
     fun armAndLiftToIntakeWaiting() = SequentialAction(
         lift.liftToIntakeWaitingAction(),
         outtake.armToIntakeAction(),
@@ -67,17 +62,17 @@ class Robot(
         lift.liftToIntakeAction()
     )
 
-    fun armAndLiftToWall() = SequentialAction(
+    fun armAndLiftToWallAction() = SequentialAction(
         lift.liftDownAction(),
         outtake.armToWallAction(),
     )
 
-    fun armAndLiftToNeutral() = ParallelAction(
+    fun armAndLiftToNeutralAction() = ParallelAction(
         lift.liftDownAction(),
         outtake.armToNeutralAction()
     )
 
-    fun armAndLiftToBar() = ParallelAction(
+    fun armAndLiftToBarAction() = ParallelAction(
         lift.liftToBarAction(),
         outtake.armToBarAction()
     )

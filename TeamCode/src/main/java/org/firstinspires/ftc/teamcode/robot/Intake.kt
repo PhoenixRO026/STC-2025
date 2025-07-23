@@ -101,7 +101,7 @@ class Intake(
 
     var extendoMode = Mode.RAW_POWER
 
-    val extendoPosition get() = extendoEncoder.getPositionAndVelocity().position - extendoOffset
+    val extendoPosition : Double get() = extendoEncoder.getPositionAndVelocity().position - extendoOffset
 
     var extendoTargetPosition = extendoPosition
         set(value) {
