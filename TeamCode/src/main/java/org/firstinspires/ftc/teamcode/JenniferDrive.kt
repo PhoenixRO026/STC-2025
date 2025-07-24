@@ -151,7 +151,7 @@ abstract class JenniferDrive: LinearOpMode() {
         }
 
         if (gamepad2.y) {
-            robot.armAndLiftToBarAction()
+            robot.outtake.armToScoreInstant()
         }
 
         if (gamepad1.a) {
