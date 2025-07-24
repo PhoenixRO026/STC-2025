@@ -32,31 +32,25 @@ class SleepyDrive : LinearOpMode() {
             robot.lift.power = -gamepad2.right_stick_y.toDouble()
             robot.arm.clawPos = gamepad2.right_trigger.toDouble()
 
-            if (wristFlipButton.wasJustPressed()) {
-                if (wristFlipButton.state) {
-                    robot.arm.wristUpsideDown()
-                }
-                else {
-                    robot.arm.wristUpright()
-                }
+            if (wristFlipButton.state) {
+                robot.arm.wristUpsideDown()
+            }
+            else {
+                robot.arm.wristUpright()
             }
 
-            if (dumpFlipButton.wasJustPressed()) {
-                if (dumpFlipButton.state) {
-                    robot.intake.dumpSample()
-                }
-                else {
-                    robot.intake.dumpDown()
-                }
+            if (dumpFlipButton.state) {
+                robot.intake.dumpSample()
+            }
+            else {
+                robot.intake.dumpDown()
             }
 
-            if (dumpFlipButton.wasJustPressed()) {
-                if (dumpFlipButton.state) {
-                    robot.intake.dumpSample()
-                }
-                else {
-                    robot.intake.dumpDown()
-                }
+            if (intakeFlipButton.state) {
+                robot.intake.tiltUp()
+            }
+            else {
+                robot.intake.tiltDown()
             }
 
             if (gamepad2.x) {
