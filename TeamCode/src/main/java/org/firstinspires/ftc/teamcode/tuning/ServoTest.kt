@@ -1,10 +1,10 @@
-package org.firstinspires.ftc.teamcode.servotuning
+package org.firstinspires.ftc.teamcode.tuning
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import com.qualcomm.robotcore.hardware.Servo
 
-@TeleOp
+@TeleOp(group = "tuning")
 class ServoTest : LinearOpMode() {
     override fun runOpMode() {
         val servo = hardwareMap.get(Servo::class.java, "rightArm")

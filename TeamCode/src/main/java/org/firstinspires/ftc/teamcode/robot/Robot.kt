@@ -2,6 +2,8 @@ package org.firstinspires.ftc.teamcode.robot
 
 import com.acmerobotics.roadrunner.ftc.RawEncoder
 import com.commonlibs.units.Pose
+import com.commonlibs.units.cm
+import com.commonlibs.units.deg
 import com.qualcomm.robotcore.hardware.DcMotor
 import com.qualcomm.robotcore.hardware.DcMotorSimple
 import com.qualcomm.robotcore.hardware.HardwareMap
@@ -11,7 +13,7 @@ import org.firstinspires.ftc.teamcode.roadrunner.MecanumDrive
 
 class Robot (
     hardwareMap: HardwareMap,
-    startPose: Pose,
+    startPose: Pose = Pose(0.0.cm, 0.0.cm, 0.0.deg),
     resetEncoders: Boolean = true
 ){
     val arm : Arm
