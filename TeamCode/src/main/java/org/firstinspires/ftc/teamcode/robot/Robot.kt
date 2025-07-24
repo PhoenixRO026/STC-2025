@@ -1,15 +1,12 @@
 package org.firstinspires.ftc.teamcode.robot
 
-import com.acmerobotics.roadrunner.Pose2d
 import com.acmerobotics.roadrunner.ftc.RawEncoder
 import com.commonlibs.units.Pose
 import com.qualcomm.robotcore.hardware.DcMotor
-import com.qualcomm.robotcore.hardware.DcMotorEx
 import com.qualcomm.robotcore.hardware.DcMotorSimple
 import com.qualcomm.robotcore.hardware.HardwareMap
 import com.qualcomm.robotcore.hardware.NormalizedColorSensor
 import com.qualcomm.robotcore.hardware.Servo
-import org.firstinspires.ftc.robotcontroller.external.samples.RobotHardware
 import org.firstinspires.ftc.teamcode.roadrunner.MecanumDrive
 
 class Robot (
@@ -20,10 +17,9 @@ class Robot (
     val arm : Arm
     val intake : Intake
     val lift : Lift
-    val drive: Drive
+    val drive: Drive = Drive(MecanumDrive(hardwareMap, startPose.pose2d))
 
     init {
-        drive = Drive(MecanumDrive(hardwareMap, startPose.pose2d))
         val liftEncMotor = drive.mecanumDrive.rightBack
         val extendoEncMotor = drive.mecanumDrive.leftFront
 
