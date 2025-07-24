@@ -46,12 +46,15 @@ class Robot (
 
         arm = Arm(rightArmServo, leftArmServo, elbowServo, wristServo, clawServo)
 
-        val tiltServo = hardwareMap.get(Servo::class.java, "inttakeTilt")
+        val tiltServo = hardwareMap.get(Servo::class.java, "intakeTilt")
         val sweeperMotor = hardwareMap.get(DcMotor::class.java, "intake")
         val extendoMotor = hardwareMap.get(DcMotor::class.java, "extendo")
         val extendoEncoder = RawEncoder(extendoEncMotor)
         val dumpServo = hardwareMap.get(Servo::class.java, "box")
         val intakeColorSensor = hardwareMap.get(NormalizedColorSensor::class.java, "intakeColorSensor")
+
+        extendoMotor.direction = DcMotorSimple.Direction.REVERSE
+        sweeperMotor.direction = DcMotorSimple.Direction.REVERSE
 
         intake = Intake(tiltServo, sweeperMotor, extendoMotor, extendoEncoder, dumpServo, intakeColorSensor)
 
@@ -59,7 +62,7 @@ class Robot (
         val rightMotor = hardwareMap.get(DcMotor::class.java, "rightLift")
         val liftEncoder = RawEncoder(liftEncMotor)
 
-        leftMotor.direction = DcMotorSimple.Direction.REVERSE
+        rightMotor.direction = DcMotorSimple.Direction.REVERSE
 
         lift = Lift(leftMotor, rightMotor, liftEncoder)
     }
