@@ -30,7 +30,7 @@ class Robot (
 
         arm = Arm(rightArmServo, leftArmServo, elbowServo, wristServo, clawServo)
 
-        val tiltServo = hardwareMap.get(Servo::class.java, "tilt")
+        val tiltServo = hardwareMap.get(Servo::class.java, "inttakeTilt")
         val sweeperMotor = hardwareMap.get(DcMotor::class.java, "intake")
         val extendoMotor = hardwareMap.get(DcMotor::class.java, "extendo")
         val extendoEncoder = hardwareMap.get(DcMotor::class.java, "motorLB")
