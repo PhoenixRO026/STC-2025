@@ -3,7 +3,11 @@ package org.firstinspires.ftc.teamcode.robot
 import com.acmerobotics.roadrunner.PoseVelocity2d
 import com.acmerobotics.roadrunner.PoseVelocity2dDual
 import com.acmerobotics.roadrunner.Vector2d
+import com.commonlibs.roadrunnerext.ex
+import com.commonlibs.units.Duration
+import com.commonlibs.units.Pose
 import com.commonlibs.units.rotate
+import com.commonlibs.units.s
 import org.firstinspires.ftc.teamcode.roadrunner.MecanumDrive
 import kotlin.math.cos
 import kotlin.math.sin
@@ -26,6 +30,12 @@ class Drive (
             rotate * speed
         )
         mecanumDrive.setDrivePowers(driveVec)
+    }
+
+    fun actionBuilder(beginPose: Pose, correctionTime: Duration = 0.s) = mecanumDrive.actionBuilder(beginPose.pose2d).ex()
+
+    fun updatePoseEstimate() {
+        mecanumDrive.updatePoseEstimate()
     }
 
     var snipperMode : Boolean = false

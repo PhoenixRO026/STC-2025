@@ -1,6 +1,9 @@
 package org.firstinspires.ftc.teamcode.teleop
 
 import com.acmerobotics.roadrunner.Pose2d
+import com.commonlibs.units.Pose
+import com.commonlibs.units.cm
+import com.commonlibs.units.deg
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import org.firstinspires.ftc.teamcode.library.buttons.ToggleButtonReader
@@ -9,7 +12,7 @@ import org.firstinspires.ftc.teamcode.robot.Robot
 @TeleOp
 class SleepyDrive : LinearOpMode() {
     override fun runOpMode() {
-        val robot = Robot(hardwareMap, Pose2d(0.0, 0.0, 0.0))
+        val robot = Robot(hardwareMap, Pose(0.0.cm, 0.0.cm, 0.0.deg))
         val wristFlipButton = ToggleButtonReader{gamepad2.a}
         val dumpFlipButton = ToggleButtonReader{gamepad2.y}
         val intakeFlipButton = ToggleButtonReader{gamepad2.b}
