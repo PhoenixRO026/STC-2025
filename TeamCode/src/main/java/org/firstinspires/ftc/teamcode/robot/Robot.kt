@@ -22,13 +22,12 @@ class Robot (
     val drive: Drive = Drive(MecanumDrive(hardwareMap, startPose.pose2d))
 
     init {
-        val liftEncMotor = drive.mecanumDrive.rightBack
-        val extendoEncMotor = drive.mecanumDrive.leftFront
+        val liftEncMotor = drive.mecanumDrive.leftFront
+        val extendoEncMotor = drive.mecanumDrive.leftBack
 
         if (resetEncoders) {
             liftEncMotor.mode = DcMotor.RunMode.STOP_AND_RESET_ENCODER
             liftEncMotor.mode = DcMotor.RunMode.RUN_WITHOUT_ENCODER
-
             extendoEncMotor.mode = DcMotor.RunMode.STOP_AND_RESET_ENCODER
             extendoEncMotor.mode = DcMotor.RunMode.RUN_WITHOUT_ENCODER
         }
@@ -61,6 +60,7 @@ class Robot (
         val liftEncoder = RawEncoder(liftEncMotor)
 
         rightMotor.direction = DcMotorSimple.Direction.REVERSE
+        liftEncoder.direction = DcMotorSimple.Direction.REVERSE
 
         lift = Lift(leftMotor, rightMotor, liftEncoder)
     }
