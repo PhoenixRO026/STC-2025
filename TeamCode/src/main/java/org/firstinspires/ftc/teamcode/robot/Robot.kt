@@ -158,7 +158,7 @@ class Robot(
         outtakeShoulderRightServo.scaleRange(0.0, 1.0)
         outtakeElbowServo.scaleRange(0.0, 1.0)
         outtakeWristServo.scaleRange(0.0, 1.0)
-        outtakeClawServo.scaleRange(0.31, 0.6)
+        outtakeClawServo.scaleRange(0.4222, 0.7172)
 
         val intakeColorSensor = hardwareMap.get(NormalizedColorSensor::class.java, "intakeColorSensor")
 

@@ -27,8 +27,8 @@ class Outtake(
         @JvmField var shoulderNeutralPos = 0.5233
         @JvmField var elbowNeutralPos = 1.0
         //WRIST
-        @JvmField var wristNormalPos = 0.5239
-        @JvmField var wristReversePos = 0.0
+        @JvmField var wristNormalPos = 0.7939
+        @JvmField var wristReversePos = 0.22
         //CLAW
         @JvmField var clawOpenPos = 1.0
         @JvmField var clawClosedPos = 0.0
@@ -49,11 +49,12 @@ class Outtake(
         @JvmField var shoulderBasketPos = 0.3678
         @JvmField var elbowBasketPos = 0.2472
         //WALL POS
-        @JvmField var shoulderWallPos = 0.0889
-        @JvmField var elbowWallPos = 0.7239
+        @JvmField var shoulderWallPos = 0.0
+        @JvmField var elbowWallPos = 0.2094
         //BAR POS
-        @JvmField var shoulderBarPos = 0.7011
-        @JvmField var elbowBarPos = 0.0356
+        @JvmField var shoulderBarPos = 0.6261
+
+        @JvmField var elbowBarPos = 0.7378
     }
 
     var shoulderPos
