@@ -37,7 +37,7 @@ class Lift(
         @JvmField var parkPose = 300.0
     }
 
-    enum class Mode {
+    enum class Mode {+-*
         PID,
         RAW_POWER
     }
