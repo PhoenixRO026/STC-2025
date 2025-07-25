@@ -10,6 +10,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap
 import com.qualcomm.robotcore.hardware.NormalizedColorSensor
 import com.qualcomm.robotcore.hardware.Servo
 import org.firstinspires.ftc.teamcode.roadrunner.MecanumDrive
+import org.firstinspires.ftc.teamcode.tuning.ServoTest2.ServoTestConfig
 
 class Robot (
     hardwareMap: HardwareMap,
@@ -40,6 +41,9 @@ class Robot (
 
         leftArmServo.direction = Servo.Direction.REVERSE
         clawServo.scaleRange(0.429, 0.8255)
+        val offset = 0.015
+        leftArmServo.scaleRange(0.0, 1.0 - offset)
+        rightArmServo.scaleRange(0.0, 1.0 - offset)
 
         arm = Arm(rightArmServo, leftArmServo, elbowServo, wristServo, clawServo)
 

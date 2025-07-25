@@ -33,7 +33,7 @@ class Arm (
         elbowPos = 0.8284
     }
     fun armToBoxIntake() {
-        armPos = 0.7426
-        elbowPos = 0.0997
+        armPos = 0.7294
+        elbowPos = 0.1213
     }
 }

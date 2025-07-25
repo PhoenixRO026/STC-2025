@@ -20,16 +20,16 @@ class Lift (
     data object LiftConfig {
         @JvmField
         var controller = PIDController(
-            kP = 0.02,
+            kP = 0.0225,
             kI = 0.001,
-            kD = 0.0001,
+            kD = 0.0007,
             stabilityThreshold = 0.2
         )
         @JvmField
         var kF = 0.1
         @JvmField
         var targetPosTolerance = 20
-    }
+    }// 525 is limit
 
     private var internalPower get() = rightMotor.power
         set(value) {
