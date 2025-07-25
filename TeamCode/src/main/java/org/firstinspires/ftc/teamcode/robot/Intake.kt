@@ -80,7 +80,7 @@ class Intake (
 
     private var extendoOffset = 0
 
-    private var extendoMode = Mode.RAW_POWER
+    var extendoMode = Mode.RAW_POWER
 
     val extendoPosition get() = extendoEncoder.getPositionAndVelocity().position.roundToInt() - extendoOffset
 
@@ -157,8 +157,8 @@ class Intake (
     fun dumpDown() {
         dumpPos = 0.4929
     }
-    fun tiltUpAction() = InstantAction {tiltPos = 0.2539}
-    fun tiltDownAction() = InstantAction {tiltPos = 0.6624}
+    fun tiltUpAction() = InstantAction {tiltPos = 0.2156}
+    fun tiltDownAction() = InstantAction {tiltPos = 0.6694}
     fun extendoToMaxPos() = extendoToPosAction(600)
     fun sweeperOnAction() = InstantAction {sweeperPower = 1.0}
     fun sweeperOffAction() = InstantAction {sweeperPower = 0.0}

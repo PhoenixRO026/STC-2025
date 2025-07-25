@@ -26,9 +26,16 @@ class Arm (
         armPos = 0.3903
         elbowPos = 0.2511
     }
+
+    fun armToBoxIntakeAction() = InstantAction {
+        armPos = 0.7513
+        elbowPos = 0.1833
+    }
+
     fun armToBoxIntake() {
         armPos = 0.7513
         elbowPos = 0.1833
+
     }
     fun armToBasket() {
         armPos = 0.3185
