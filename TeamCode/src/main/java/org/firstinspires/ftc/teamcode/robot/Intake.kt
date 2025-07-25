@@ -39,6 +39,8 @@ class Intake (
         )
         @JvmField var targetPosTolerance = 10
         @JvmField var extendoLim = 600
+
+        @JvmField var extendoIntake = 190
     }
 
     enum class SensorColor {

@@ -27,8 +27,8 @@ class Arm (
         elbowPos = 0.2877
     }
     fun armToBoxIntake() {
-        armPos = 0.7294
-        elbowPos = 0.1213
+        armPos = 0.7513
+        elbowPos = 0.1833
     }
     fun armToBasket() {
         armPos = 0.3185
