@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.teleop
+package org.firstinspires.ftc.teamcode.teleOp
 
 import com.acmerobotics.dashboard.FtcDashboard
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry
@@ -6,6 +6,8 @@ import com.acmerobotics.dashboard.telemetry.TelemetryPacket
 import com.acmerobotics.roadrunner.Action
 import com.acmerobotics.roadrunner.InstantAction
 import com.acmerobotics.roadrunner.SequentialAction
+import com.acmerobotics.roadrunner.SleepAction
+import com.commonlibs.units.s
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
 import org.firstinspires.ftc.teamcode.library.TimeKeep
 import org.firstinspires.ftc.teamcode.library.buttons.ButtonReader
@@ -119,6 +121,8 @@ abstract class JenniferDrive: LinearOpMode() {
                     robot.intake.extendoTargetPosition = Intake.IntakeConfig.extendoIntake
                     robot.intake.extendoMode = Intake.Mode.ACTION
                 },
+                SleepAction(2.0
+                ),
                 robot.armAndLiftToIntake(),
                 robot.outtake.closeClawAction(),
                 InstantAction {
@@ -137,7 +141,7 @@ abstract class JenniferDrive: LinearOpMode() {
         }
 
         if (gamepad2.a) {
-            robot.outtake.armToWallInstant()
+            driver2Action = robot.outtake.armToWallAction()
         }
 
         if (gamepad2.b) {
@@ -145,11 +149,11 @@ abstract class JenniferDrive: LinearOpMode() {
         }
 
         if (gamepad2.x) {
-            robot.lift.liftToScoreAction()
+            driver2Action = robot.lift.liftToScoreAction()
         }
 
         if (gamepad2.y) {
-            robot.armAndLiftToBarInstant()
+            driver2Action = robot.armAndLiftToBarAction()
         }
 
         if (gamepad1.a) {
@@ -165,11 +169,11 @@ abstract class JenniferDrive: LinearOpMode() {
         }
 
         if (gamepad1.dpad_left) {
-            robot.intake.boxCloseAction()
+            robot.intake.boxCloseInstant()
         }
 
         if (gamepad1.dpad_right) {
-            robot.intake.boxOpenAction()
+            robot.intake.boxOpenInstant()
         }
 
         if (takeYellowsButton.wasJustPressed()) {
@@ -180,10 +184,13 @@ abstract class JenniferDrive: LinearOpMode() {
         }
 
         if (takeColoredButton.wasJustPressed()) {
-            driver1Action = SequentialAction(robot.intake.takeSampleSequenceAction(when (color) {
-                Color.RED -> Intake.SensorColor.RED
-                Color.BLUE -> Intake.SensorColor.BLUE
-            }),
+            driver1Action = SequentialAction(
+                robot.intake.takeSampleSequenceAction(
+                    when (color) {
+                        Color.RED -> Intake.SensorColor.RED
+                        Color.BLUE -> Intake.SensorColor.BLUE
+                    }
+                ),
                 robot.intake.sampleToBox()
             )
         }

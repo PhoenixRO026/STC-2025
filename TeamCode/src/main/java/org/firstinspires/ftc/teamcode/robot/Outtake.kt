@@ -4,6 +4,7 @@ import com.acmerobotics.dashboard.config.Config
 import com.acmerobotics.dashboard.telemetry.TelemetryPacket
 import com.acmerobotics.roadrunner.Action
 import com.acmerobotics.roadrunner.ParallelAction
+import com.acmerobotics.roadrunner.SequentialAction
 import com.acmerobotics.roadrunner.SleepAction
 import com.commonlibs.units.S
 import com.commonlibs.units.SleepAction
@@ -26,7 +27,8 @@ class Outtake(
         @JvmField var wristActionSleepDuration = 2.s
         @JvmField var clawActionSleepDuration = 0.1.s
         ////////////////////////////////////////////////NEUTRAL
-        @JvmField var shoulderNeutralPos = 0.5127
+        @JvmField var shoulderMidPos = 0.34
+        @JvmField var shoulderNeutralPos =  shoulderMidPos//0.5127
         @JvmField var elbowNeutralPos = 0.1461
         /////////////////////////////////////////////////WRIST
         @JvmField var wristNormalPos = 0.7839
@@ -53,6 +55,7 @@ class Outtake(
         /////////////////////////////////////////////////////WALL POS
         @JvmField var shoulderWallPos = 0.0
         @JvmField var elbowWallPos = 0.2833
+
         ///////////////////////////////////////////////////////BAR POS
         @JvmField var shoulderBarPos = 0.3903
         @JvmField var elbowBarPos = 0.2511
@@ -65,17 +68,9 @@ class Outtake(
             shoulderRightServo.position = value
         }
 
-    var elbowPos
-        get() = elbowServo.position
-        set(value) {
-            elbowServo.position = value
-        }
+    var elbowPos by elbowServo::position
 
-    var wristPos
-        get() = wristServo.position
-        set(value) {
-            wristServo.position = value
-        }
+    var wristPos by wristServo::position
 
     var clawPos: Double = 0.5
         get() = clawServo.position
@@ -171,7 +166,9 @@ class Outtake(
     fun wristToReverseAction() = wristToPosAction(OuttakeConfig.wristReversePos)
 
     // ARM
+    fun shoulderToMidAction() = shoulderToPosAction(OuttakeConfig.shoulderMidPos)
     fun shoulderToNeutralAction() = shoulderToPosAction(OuttakeConfig.shoulderNeutralPos)
+
     fun elbowToNeutralAction() = elbowToPosAction(OuttakeConfig.elbowNeutralPos)
 
     fun shoulderToIntakeAction() = shoulderToPosAction(OuttakeConfig.shoulderIntakePos)
@@ -193,11 +190,14 @@ class Outtake(
         elbowPos = OuttakeConfig.elbowWallPos
     }
 
-    fun armToWallAction() = ParallelAction(
-        shoulderToWallAction(),
-        elbowToWallAction(),
-        wristToWallAction(),
-        openClawAction()
+    fun armToWallAction() = SequentialAction(
+        shoulderToMidAction(),
+        ParallelAction(
+            shoulderToWallAction(),
+            elbowToWallAction(),
+            wristToWallAction(),
+            openClawAction()
+        )
     )
 
     fun armToNeutralAction() = ParallelAction(

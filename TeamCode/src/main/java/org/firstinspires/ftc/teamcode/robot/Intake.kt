@@ -31,9 +31,9 @@ class Intake(
     data object IntakeConfig {
         @JvmField
         var controller = PIDController(
-            kP = 0.009,
-            kD = 0.0005,
-            kI = 0.01,
+            kP = 0.015,
+            kD = 0.00069420,
+            kI = 0.001,
             stabilityThreshold = 0.2
         )
         @JvmField var targetPosTolerance = 10
@@ -43,7 +43,8 @@ class Intake(
         @JvmField var boxActionSleepDuration = 1.s
 
         @JvmField var extendoMax = 600.0
-        @JvmField var extendoIn = 50.0
+        @JvmField var extendoIn = 20.0
+
         @JvmField var extendoIntake = 190.0
 
         @JvmField var tiltUp = 0.2156
@@ -189,6 +190,7 @@ class Intake(
         telemetry.addData("sweeper power", sweeperPower)
         telemetry.addData("extendo power", extendoPower)
         telemetry.addData("extendoPos", extendoPosition)
+        telemetry.addData("extendoTargetPos", extendoTargetPosition)
         //telemetry.addData("sweeper current", sweeperMotor.getCurrent(CurrentUnit.AMPS))
         //telemetry.addData("extendo current", extendoMotor.getCurrent(CurrentUnit.AMPS))
     }
@@ -218,11 +220,19 @@ class Intake(
     }
 
     fun boxToPosAction(pos: Double): Action {
-        val sleepDuration = IntakeConfig.boxActionSleepDuration
+        val sleepDuration = IntakeConfig.boxActionSleepDuration * abs(pos - boxPosition)
         return SequentialAction(
             InstantAction { boxPosition = pos },
             SleepAction(sleepDuration)
         )
+    }
+
+    fun boxOpenInstant() {
+        boxPosition= IntakeConfig.boxOpen
+    }
+
+    fun boxCloseInstant() {
+        boxPosition= IntakeConfig.boxClose
     }
 
     fun boxOpenAction() = boxToPosAction(IntakeConfig.boxOpen)

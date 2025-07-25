@@ -25,7 +25,7 @@ class Lift(
             stabilityThreshold = 0.2
         )
         @JvmField
-        var kF: Double = 0.1
+        var kF: Double = 0.2
         @JvmField
         var targetPosTolerance = 20.0
 
@@ -33,7 +33,7 @@ class Lift(
         @JvmField var intakePos = 0.0
         @JvmField var intakeWaitingPos = 0.0
         @JvmField var barPos = 200.0
-        @JvmField var scorePos = 232.0
+        @JvmField var scorePos = 323.0
         @JvmField var parkPose = 300.0
     }
 
@@ -58,14 +58,14 @@ class Lift(
         get() = _power
         set(value) {
             if (currentMode == Mode.PID && value == 0.0) return
-
+            if (position >= LiftConfig.basketPos && value > 0.0) return
             _power = if (value < 0.0) value else value + LiftConfig.kF
             currentMode = Mode.RAW_POWER
         }
 
     var targetPosition = position
         set(value) {
-            field = value
+            field = value.coerceIn(0.0, LiftConfig.basketPos)
             currentMode = Mode.PID
         }
 

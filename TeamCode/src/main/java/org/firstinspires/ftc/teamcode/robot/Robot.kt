@@ -100,24 +100,24 @@ class Robot(
         val mecanumDrive = MecanumDrive(hardwareMap, pose.pose2d)
 
         if (resetEncoders) {
-            val liftEncMotor = mecanumDrive.rightBack
-            liftEncMotor.mode = DcMotor.RunMode.STOP_AND_RESET_ENCODER
-            liftEncMotor.mode = DcMotor.RunMode.RUN_WITHOUT_ENCODER
-            val extendoEncMotor = mecanumDrive.leftFront
-            extendoEncMotor.mode = DcMotor.RunMode.STOP_AND_RESET_ENCODER
-            extendoEncMotor.mode = DcMotor.RunMode.RUN_WITHOUT_ENCODER
+            val liftEncoder = mecanumDrive.leftFront
+            liftEncoder.mode = DcMotor.RunMode.STOP_AND_RESET_ENCODER
+            liftEncoder.mode = DcMotor.RunMode.RUN_WITHOUT_ENCODER
+            val intakeExtendoEncoder = mecanumDrive.leftBack
+            intakeExtendoEncoder.mode = DcMotor.RunMode.STOP_AND_RESET_ENCODER
+            intakeExtendoEncoder.mode = DcMotor.RunMode.RUN_WITHOUT_ENCODER
         }
 
-        val liftEncoder = RawEncoder(mecanumDrive.rightBack)
-        val intakeExtendoEncoder = RawEncoder(mecanumDrive.leftFront)
+        val liftEncoder = RawEncoder(mecanumDrive.leftFront)
+        val intakeExtendoEncoder = RawEncoder(mecanumDrive.leftBack)
 
         liftEncoder.direction = DcMotorSimple.Direction.FORWARD
         intakeExtendoEncoder.direction = DcMotorSimple.Direction.FORWARD
 
-        val liftLeftMotor = hardwareMap.get(DcMotorEx::class.java, "motorLiftLeft")
-        val liftRightMotor = hardwareMap.get(DcMotorEx::class.java, "motorLiftRight")
-        val intakeExtendoMotor = hardwareMap.get(DcMotorEx::class.java, "motorExtendoIntake")
-        val intakeSweeperMotor = hardwareMap.get(DcMotorEx::class.java, "motorSweeper")
+        val liftLeftMotor = hardwareMap.get(DcMotorEx::class.java, "leftLift")
+        val liftRightMotor = hardwareMap.get(DcMotorEx::class.java, "rightLift")
+        val intakeExtendoMotor = hardwareMap.get(DcMotorEx::class.java, "extendo")
+        val intakeSweeperMotor = hardwareMap.get(DcMotorEx::class.java, "intake")
 
         liftLeftMotor.mode = DcMotor.RunMode.RUN_WITHOUT_ENCODER
         liftRightMotor.mode = DcMotor.RunMode.RUN_WITHOUT_ENCODER
@@ -127,8 +127,8 @@ class Robot(
         liftLeftMotor.direction = DcMotorSimple.Direction.REVERSE
         liftRightMotor.direction = DcMotorSimple.Direction.FORWARD
 
-        intakeExtendoMotor.direction = DcMotorSimple.Direction.FORWARD
-        intakeSweeperMotor.direction = DcMotorSimple.Direction.FORWARD
+        intakeExtendoMotor.direction = DcMotorSimple.Direction.REVERSE
+        intakeSweeperMotor.direction = DcMotorSimple.Direction.REVERSE
 
         liftLeftMotor.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE
         liftRightMotor.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE
@@ -136,21 +136,21 @@ class Robot(
         intakeSweeperMotor.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE
 
 
-        val intakeTiltServo = hardwareMap.get(Servo::class.java, "servoIntakeTilt")
-        val intakeBoxServo = hardwareMap.get(Servo::class.java, "servoIntakeBox")
-        val outtakeShoulderLeftServo = hardwareMap.get(Servo::class.java, "servoShoulderLeft")
-        val outtakeShoulderRightServo = hardwareMap.get(Servo::class.java, "servoShoulderRight")
-        val outtakeElbowServo = hardwareMap.get(Servo::class.java, "servoElbow")
-        val outtakeWristServo = hardwareMap.get(Servo::class.java, "servoWrist")
-        val outtakeClawServo = hardwareMap.get(Servo::class.java, "servoClaw")
+        val intakeTiltServo = hardwareMap.get(Servo::class.java, "intakeTilt")
+        val intakeBoxServo = hardwareMap.get(Servo::class.java, "box")
+        val outtakeShoulderLeftServo = hardwareMap.get(Servo::class.java, "leftArm")
+        val outtakeShoulderRightServo = hardwareMap.get(Servo::class.java, "rightArm")
+        val outtakeElbowServo = hardwareMap.get(Servo::class.java, "elbow")
+        val outtakeWristServo = hardwareMap.get(Servo::class.java, "wrist")
+        val outtakeClawServo = hardwareMap.get(Servo::class.java, "claw")
 
         intakeTiltServo.direction = Servo.Direction.FORWARD
         intakeBoxServo.direction = Servo.Direction.FORWARD
-        outtakeShoulderLeftServo.direction = Servo.Direction.FORWARD
-        outtakeShoulderRightServo.direction = Servo.Direction.REVERSE
+        outtakeShoulderLeftServo.direction = Servo.Direction.REVERSE
+        outtakeShoulderRightServo.direction = Servo.Direction.FORWARD
         outtakeElbowServo.direction = Servo.Direction.FORWARD
         outtakeWristServo.direction = Servo.Direction.FORWARD
-        outtakeClawServo.direction = Servo.Direction.FORWARD
+        outtakeClawServo.direction = Servo.Direction.REVERSE
 
         val offsetShoulder = 0.015
 
