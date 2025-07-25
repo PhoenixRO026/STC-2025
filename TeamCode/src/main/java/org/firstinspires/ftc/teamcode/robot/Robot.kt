@@ -82,6 +82,12 @@ class Robot(
         outtake.armToBarInstant()
     }
 
+    fun armAndLiftToScoreAction() = SequentialAction(
+        lift.liftToScoreAction(),
+        SleepAction(0.5.s),
+        outtake.openClawAction()
+    )
+
     fun turnOffAction() = ParallelAction(
         outtake.armToNeutralAction(),
         intake.sweeperOffAction(),
@@ -146,13 +152,15 @@ class Robot(
         outtakeWristServo.direction = Servo.Direction.FORWARD
         outtakeClawServo.direction = Servo.Direction.FORWARD
 
+        val offsetShoulder = 0.015
+
         intakeTiltServo.scaleRange(0.0, 1.0)
         intakeBoxServo.scaleRange(0.0, 1.0)
-        outtakeShoulderLeftServo.scaleRange(0.0, 1.0)
-        outtakeShoulderRightServo.scaleRange(0.0, 1.0)
+        outtakeShoulderLeftServo.scaleRange(0.0, 1.0 - offsetShoulder)
+        outtakeShoulderRightServo.scaleRange(0.0, 1.0 - offsetShoulder)
         outtakeElbowServo.scaleRange(0.0, 1.0)
         outtakeWristServo.scaleRange(0.0, 1.0)
-        outtakeClawServo.scaleRange(0.4222, 0.7172)
+        outtakeClawServo.scaleRange(0.298, 0.437)
 
         val intakeColorSensor = hardwareMap.get(NormalizedColorSensor::class.java, "intakeColorSensor")
 

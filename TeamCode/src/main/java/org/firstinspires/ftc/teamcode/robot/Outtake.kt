@@ -26,11 +26,11 @@ class Outtake(
         @JvmField var wristActionSleepDuration = 2.s
         @JvmField var clawActionSleepDuration = 0.1.s
         ////////////////////////////////////////////////NEUTRAL
-        @JvmField var shoulderNeutralPos = 0.5233
-        @JvmField var elbowNeutralPos = 1.0
+        @JvmField var shoulderNeutralPos = 0.5127
+        @JvmField var elbowNeutralPos = 0.1461
         /////////////////////////////////////////////////WRIST
-        @JvmField var wristNormalPos = 0.7939
-        @JvmField var wristReversePos = 0.22
+        @JvmField var wristNormalPos = 0.7839
+        @JvmField var wristReversePos = 0.2314
         //////////////////////////////////////////////////CLAW
         @JvmField var clawOpenPos = 1.0
         @JvmField var clawClosedPos = 0.0
@@ -45,18 +45,17 @@ class Outtake(
         @JvmField var wristAutoInit = wristNormalPos
         @JvmField var clawAutoInit = clawClosedPos
         ////////////////////////////////////////////////////INTAKE POS
-        @JvmField var shoulderIntakePos = 0.7933
-        @JvmField var elbowIntakePos = 0.7256
-        /////////////////////////////////////////////////////BASKET POS
-        @JvmField var shoulderBasketPos = 0.3678
-        @JvmField var elbowBasketPos = 0.2472
+        @JvmField var shoulderIntakePos = 0.7513
+        @JvmField var elbowIntakePos = 0.1833
+        /////////////////////////////////////////////////////BASKET POS // NOT DONE
+        @JvmField var shoulderBasketPos = 0.3
+        @JvmField var elbowBasketPos = 0.8
         /////////////////////////////////////////////////////WALL POS
         @JvmField var shoulderWallPos = 0.0
-        @JvmField var elbowWallPos = 0.2094
+        @JvmField var elbowWallPos = 0.2833
         ///////////////////////////////////////////////////////BAR POS
-        @JvmField var shoulderBarPos = 0.6261
-        @JvmField var shoulderScorePos = 0.5
-        @JvmField var elbowBarPos = 0.7378
+        @JvmField var shoulderBarPos = 0.3903
+        @JvmField var elbowBarPos = 0.2511
     }
 
     var shoulderPos
@@ -181,8 +180,6 @@ class Outtake(
     fun shoulderToBarAction() = shoulderToPosAction(OuttakeConfig.shoulderBarPos)
     fun elbowToBarAction() = elbowToPosAction(OuttakeConfig.elbowBarPos)
 
-    fun shoulderToScoreAction() = shoulderToPosAction(OuttakeConfig.shoulderScorePos)
-
     fun shoulderToBasketAction() = shoulderToPosAction(OuttakeConfig.shoulderBasketPos)
     fun elbowToBasketAction() = elbowToPosAction(OuttakeConfig.elbowBasketPos)
 
@@ -235,16 +232,6 @@ class Outtake(
         wristToNormalAction(),
         shoulderToBarAction(),
         elbowToBarAction(),
-    )
-
-    fun armToScoreInstant() {
-        shoulderPos = OuttakeConfig.shoulderScorePos
-    }
-
-    fun armToScoreAction() = ParallelAction(
-        shoulderToScoreAction(),
-        SleepAction(0.5.s),
-        openClawAction()
     )
 
     fun armToBasketAction() = ParallelAction(

@@ -6,12 +6,8 @@ import com.acmerobotics.roadrunner.Action
 import com.acmerobotics.roadrunner.ftc.Encoder
 import com.commonlibs.units.Duration
 import com.qualcomm.robotcore.hardware.DcMotorEx
-import com.qualcomm.robotcore.hardware.Servo
 import org.firstinspires.ftc.robotcore.external.Telemetry
-import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit
 import org.firstinspires.ftc.teamcode.library.controller.PIDController
-import org.firstinspires.ftc.teamcode.robot.Intake.IntakeConfig
-import org.firstinspires.ftc.teamcode.robot.Intake.Mode
 import kotlin.math.abs
 
 class Lift(
@@ -33,16 +29,12 @@ class Lift(
         @JvmField
         var targetPosTolerance = 20.0
 
-        @JvmField var basketPos = 2557.0
-        @JvmField var intakePos = 400.0
-        @JvmField var intakeWaitingPos = 570.0
-        @JvmField var barInitPos = 691.0
-        @JvmField var parkPose = 1000.0
-
-        @JvmField var gearShiftLeftUp = 0.5244
-        @JvmField var gearShiftLeftDown = 0.4328
-        @JvmField var gearShiftRightUp = 0.5061
-        @JvmField var gearShiftRightDown = 0.5
+        @JvmField var basketPos = 810.0
+        @JvmField var intakePos = 0.0
+        @JvmField var intakeWaitingPos = 0.0
+        @JvmField var barPos = 200.0
+        @JvmField var scorePos = 232.0
+        @JvmField var parkPose = 300.0
     }
 
     enum class Mode {
@@ -104,16 +96,17 @@ class Lift(
     }
 
     fun liftToBarInitInstant() {
-        targetPosition = LiftConfig.barInitPos
+        targetPosition = LiftConfig.barPos
     }
 
-    fun liftToBarAction() = liftToPosAction(LiftConfig.barInitPos)
+    fun liftToBarAction() = liftToPosAction(LiftConfig.barPos)
 
     fun liftToBasketAction() = liftToPosAction(LiftConfig.basketPos)
     fun liftToIntakeAction() = liftToPosAction(LiftConfig.intakePos)
     fun liftToIntakeWaitingAction() = liftToPosAction(LiftConfig.intakeWaitingPos)
     fun liftDownAction() = liftToPosAction(40.0)
-    fun liftToParking() = liftToPosAction(LiftConfig.parkPose)
+    fun liftToParkingAction() = liftToPosAction(LiftConfig.parkPose)
+    fun liftToScoreAction() = liftToPosAction(LiftConfig.scorePos)
 
     fun addTelemetry(telemetry: Telemetry) {
         telemetry.addData("lift power", power)

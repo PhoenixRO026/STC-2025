@@ -63,9 +63,9 @@ class RedRight : LinearOpMode() {
             drive.actionBuilder(startPose)
                     .lineToY(preloadSpecimenPos.position.y)
                     .build().delayedBy(0.1.s),
-                robot.armAndLiftToIntakeWaiting()
+                robot.armAndLiftToBarAction()
             ),
-            outtake.armToScoreAction()
+            robot.armAndLiftToScoreAction(),
         )
 
         val sampleToHuman = SequentialAction(
@@ -131,7 +131,7 @@ class RedRight : LinearOpMode() {
                     .build(),
                 robot.armAndLiftToBarAction()
             ),
-            outtake.armToScoreAction()
+            robot.armAndLiftToScoreAction(),
         )
 
         val scoreSpecimen1 = SequentialAction(
@@ -143,7 +143,7 @@ class RedRight : LinearOpMode() {
                 .build(),
                 robot.armAndLiftToBarAction()
             ),
-            outtake.armToScoreAction()
+            robot.armAndLiftToScoreAction(),
         )
 
         val scoreSpecimen2 = SequentialAction(
@@ -155,7 +155,7 @@ class RedRight : LinearOpMode() {
                     .build(),
                 robot.armAndLiftToBarAction()
             ),
-            outtake.armToScoreAction()
+            robot.armAndLiftToScoreAction(),
         )
 
         val scoreSpecimen3 = SequentialAction(
@@ -167,7 +167,7 @@ class RedRight : LinearOpMode() {
                     .build(),
                 robot.armAndLiftToBarAction()
             ),
-            outtake.armToScoreAction()
+            robot.armAndLiftToScoreAction(),
         )
 
         val action = SequentialAction(
