@@ -37,27 +37,28 @@ class Intake(
             stabilityThreshold = 0.2
         )
         @JvmField var targetPosTolerance = 10
-        @JvmField var extendoLim = 560
+        @JvmField var extendoLim = 600
 
         @JvmField var titlActionSleepDuration = 1.s
         @JvmField var boxActionSleepDuration = 1.s
 
-        @JvmField var extendoMax = 560.0
-        @JvmField var extendoIn = -50.0
+        @JvmField var extendoMax = 600.0
+        @JvmField var extendoIn = 50.0
+        @JvmField var extendoIntake = 100.0
 
-        @JvmField var tiltUp = 0.1933
-        @JvmField var tiltDown = 0.62
+        @JvmField var tiltUp = 0.2156
+        @JvmField var tiltDown = 0.6694
         @JvmField var tiltGround = 0.6728
 
-        @JvmField var boxOpen = 0.0
-        @JvmField var boxClose = 0.6
+        @JvmField var boxOpen = 0.1896
+        @JvmField var boxClose = 0.4929
 
         @JvmField var tiltTeleInit = tiltUp
         @JvmField var tiltAutoInit = tiltUp
 
-        @JvmField var extendoLeftRedSample = 560.0
-        @JvmField var extendoMiddleRedSample = 560.0
-        @JvmField var extendoRightRedSample = 560.0
+        @JvmField var extendoLeftRedSample = extendoMax
+        @JvmField var extendoMiddleRedSample = extendoMax
+        @JvmField var extendoRightRedSample = extendoMax
 
         @JvmField var sampleToBoxPower = 1.0
     }

@@ -77,16 +77,10 @@ class Robot(
         outtake.armToBarAction()
     )
 
-    fun robotToBarInstant() {
+    fun armAndLiftToBarInstant() {
         lift.liftToBarInitInstant()
         outtake.armToBarInstant()
     }
-
-    fun armAndLiftTakeSample() = SequentialAction(
-        armAndLiftToIntakeWaiting(),
-        SleepAction(1.0.s),
-        armAndLiftToIntake()
-    )
 
     fun turnOffAction() = ParallelAction(
         outtake.armToNeutralAction(),

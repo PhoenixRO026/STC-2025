@@ -1,11 +1,10 @@
-package org.firstinspires.ftc.teamcode
+package org.firstinspires.ftc.teamcode.teleop
 
 import com.acmerobotics.dashboard.FtcDashboard
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry
 import com.acmerobotics.dashboard.telemetry.TelemetryPacket
 import com.acmerobotics.roadrunner.Action
 import com.acmerobotics.roadrunner.InstantAction
-import com.acmerobotics.roadrunner.ParallelAction
 import com.acmerobotics.roadrunner.SequentialAction
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode
 import org.firstinspires.ftc.teamcode.library.TimeKeep
@@ -116,9 +115,8 @@ abstract class JenniferDrive: LinearOpMode() {
 
         if (armIntakeButton.wasJustPressed()) {
             driver2Action = SequentialAction(
-                robot.lift.liftToIntakeWaitingAction(),
                 InstantAction {
-                    robot.intake.extendoTargetPosition = Intake.IntakeConfig.extendoIn
+                    robot.intake.extendoTargetPosition = Intake.IntakeConfig.extendoIntake
                     robot.intake.extendoMode = Intake.Mode.ACTION
                 },
                 robot.armAndLiftToIntake(),
@@ -147,11 +145,11 @@ abstract class JenniferDrive: LinearOpMode() {
         }
 
         if (gamepad2.x) {
-            robot.robotToBarInstant()
+            robot.outtake.shoulderToScoreAction()
         }
 
         if (gamepad2.y) {
-            robot.outtake.armToScoreInstant()
+            robot.armAndLiftToBarInstant()
         }
 
         if (gamepad1.a) {
@@ -166,24 +164,28 @@ abstract class JenniferDrive: LinearOpMode() {
             robot.intake.tiltDownInstant()
         }
 
+        if (gamepad1.dpad_left) {
+            robot.intake.boxCloseAction()
+        }
+
+        if (gamepad1.dpad_right) {
+            robot.intake.boxOpenAction()
+        }
+
         if (takeYellowsButton.wasJustPressed()) {
             driver1Action = SequentialAction(
-                ParallelAction(
-                    SequentialAction(
-                        robot.lift.liftToIntakeWaitingAction(),
-                        robot.outtake.armToIntakeAction()
-                    ),
-                    robot.intake.takeSampleSequenceAction(Intake.SensorColor.YELLOW),
-                ),
+                robot.intake.takeSampleSequenceAction(Intake.SensorColor.YELLOW),
                 robot.intake.sampleToBox()
             )
         }
 
         if (takeColoredButton.wasJustPressed()) {
-            driver1Action = robot.intake.takeSampleSequenceAction(when (color) {
+            driver1Action = SequentialAction(robot.intake.takeSampleSequenceAction(when (color) {
                 Color.RED -> Intake.SensorColor.RED
                 Color.BLUE -> Intake.SensorColor.BLUE
-            })
+            }),
+                robot.intake.sampleToBox()
+            )
         }
 
         if (gamepad1.left_bumper) {
