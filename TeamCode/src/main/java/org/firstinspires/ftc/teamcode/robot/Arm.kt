@@ -23,8 +23,8 @@ class Arm (
     fun wristUpright() {wristPos = 0.7839}
     fun wristUpsideDown() {wristPos = 0.2314}
     fun armToSpecimen() {
-        armPos = 0.6778
-        elbowPos = 0.2877
+        armPos = 0.3903
+        elbowPos = 0.2511
     }
     fun armToBoxIntake() {
         armPos = 0.7513
@@ -36,10 +36,10 @@ class Arm (
     }
     fun armToWall() {
         armPos = 0.0
-        elbowPos = 0.273
+        elbowPos = 0.2833
     }
-    fun armToSpecimen2() {
-        armPos = 0.6425
-        elbowPos = 0.8284
+    fun armToNeutral() {
+        armPos = 0.5127
+        elbowPos = 0.1461
     }
 }

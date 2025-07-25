@@ -33,7 +33,7 @@ class Lift (
 
     val maxPos = 810
     val basketPos = maxPos
-    val barPos = 300
+    val barPos = 232
     val scoreBarPos = 200
 
     private var internalPower get() = rightMotor.power
