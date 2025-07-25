@@ -26,7 +26,7 @@ class Lift (
             stabilityThreshold = 0.2
         )
         @JvmField
-        var kF = 0.1
+        var kF = 0.2
         @JvmField
         var targetPosTolerance = 20
     }// 525 is limit

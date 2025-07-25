@@ -144,10 +144,10 @@ class Intake (
     var dumpPos by dumpServo::position
 
     fun tiltUp() {
-        tiltPos = 0.2539
+        tiltPos = 0.2156
     }
     fun tiltDown() {
-        tiltPos = 0.6624
+        tiltPos = 0.6694
     }
     fun dumpSample() {
         dumpPos = 0.1896
