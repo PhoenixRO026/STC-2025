@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.robot
 
+import com.acmerobotics.roadrunner.InstantAction
+import com.acmerobotics.roadrunner.ParallelAction
 import com.qualcomm.robotcore.hardware.Servo
 
 class Arm (
@@ -18,22 +20,26 @@ class Arm (
     var wristPos by wristServo::position
     var elbowPos by elbowServo::position
 
-    fun wristUpright() {
-        wristPos = 0.7839
-    }
-    fun wristUpsideDown() {
-        wristPos = 0.2314
-    }
-    fun armToSpecimen1() {
+    fun wristUpright() {wristPos = 0.7839}
+    fun wristUpsideDown() {wristPos = 0.2314}
+    fun armToSpecimen() {
         armPos = 0.6778
         elbowPos = 0.2877
-    }
-    fun armToSpecimen2() {
-        armPos = 0.6425
-        elbowPos = 0.8284
     }
     fun armToBoxIntake() {
         armPos = 0.7294
         elbowPos = 0.1213
+    }
+    fun armToBasket() {
+        armPos = 0.3185
+        elbowPos = 0.8514
+    }
+    fun armToWall() {
+        armPos = 0.0
+        elbowPos = 0.273
+    }
+    fun armToSpecimen2() {
+        armPos = 0.6425
+        elbowPos = 0.8284
     }
 }

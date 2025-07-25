@@ -39,8 +39,9 @@ class Robot (
         val leftArmServo = hardwareMap.get(Servo::class.java, "leftArm")
         val rightArmServo = hardwareMap.get(Servo::class.java, "rightArm")
 
+        clawServo.direction = Servo.Direction.REVERSE
         leftArmServo.direction = Servo.Direction.REVERSE
-        clawServo.scaleRange(0.429, 0.8255)
+        clawServo.scaleRange(1.0 - 0.702,1.0 - 0.563)
         val offset = 0.015
         leftArmServo.scaleRange(0.0, 1.0 - offset)
         rightArmServo.scaleRange(0.0, 1.0 - offset)

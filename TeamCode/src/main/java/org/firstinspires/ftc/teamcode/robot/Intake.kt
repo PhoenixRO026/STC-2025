@@ -4,7 +4,10 @@ import android.graphics.Color
 import com.acmerobotics.dashboard.config.Config
 import com.acmerobotics.dashboard.telemetry.TelemetryPacket
 import com.acmerobotics.roadrunner.Action
+import com.acmerobotics.roadrunner.InstantAction
+import com.acmerobotics.roadrunner.ParallelAction
 import com.acmerobotics.roadrunner.RaceAction
+import com.acmerobotics.roadrunner.SequentialAction
 import com.acmerobotics.roadrunner.ftc.Encoder
 import com.commonlibs.units.Duration
 import com.commonlibs.units.SleepAction
@@ -152,4 +155,35 @@ class Intake (
     fun dumpDown() {
         dumpPos = 0.4929
     }
+    fun tiltUpAction() = InstantAction {tiltPos = 0.2539}
+    fun tiltDownAction() = InstantAction {tiltPos = 0.6624}
+    fun extendoToMaxPos() = extendoToPosAction(600)
+    fun sweeperOnAction() = InstantAction {sweeperPower = 1.0}
+    fun sweeperOffAction() = InstantAction {sweeperPower = 0.0}
+
+    fun sweeperBoxAction() = InstantAction {sweeperPower = 1.0}
+
+    fun extendoReadyForSampleling() = ParallelAction (
+        extendoToMaxPos(),
+        tiltUpAction()
+    )
+
+    fun takeOutSample() = SequentialAction(
+        sweeperBoxAction(),
+        waitForColorAction(SensorColor.NONE),
+        sweeperOffAction()
+    )
+
+    fun takeSample(color: SensorColor, maxTime: Duration = 0.5.s) = SequentialAction(
+        ParallelAction(
+            sweeperOnAction(),
+            InstantAction {
+                tiltDownAction()
+            },
+            waitForColorAction(color, maxTime),
+        ),
+        sweeperOffAction()
+    )
+
+    fun passSampleWithDump() = InstantAction {dumpPos = 0.1896}
 }

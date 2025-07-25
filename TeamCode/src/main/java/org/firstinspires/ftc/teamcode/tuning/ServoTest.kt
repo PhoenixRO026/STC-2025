@@ -14,7 +14,7 @@ class ServoTest : LinearOpMode() {
 
         servo2.direction = Servo.Direction.REVERSE*/
 
-        val arm = Robot(hardwareMap).arm
+        val robot = Robot(hardwareMap)
 
         waitForStart()
 
@@ -29,6 +29,10 @@ class ServoTest : LinearOpMode() {
             deltaTime = currentTime - previousTime
             previousTime = currentTime
 
+            if (gamepad1.x) {
+                pos1 += deltaTime * 0.3
+            }
+
             if (gamepad1.y)  {
                 pos1 += deltaTime * 0.1
             }
@@ -41,13 +45,17 @@ class ServoTest : LinearOpMode() {
             if (gamepad1.dpad_down) {
                 pos -= deltaTime * 0.1
             }
+            robot.arm.clawPos = gamepad1.right_trigger.toDouble()
 
             pos = pos.coerceIn(0.0, 1.0)
             pos1 = pos1.coerceIn(0.0, 1.0)
-            arm.armPos = pos
-            arm.elbowPos = pos1
+            robot.arm.armPos = pos
+            robot.arm.elbowPos = pos1
+
             telemetry.addData("arm pos", pos)
             telemetry.addData("elbow pos", pos1)
+            telemetry.addData("lift pos", robot.lift.position)
+            telemetry.addData("claw pos", robot.arm.clawPos)
             telemetry.update()
         }
     }

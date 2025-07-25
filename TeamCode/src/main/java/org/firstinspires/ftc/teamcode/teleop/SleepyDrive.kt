@@ -68,7 +68,7 @@ class SleepyDrive : LinearOpMode() {
                 robot.arm.armToBoxIntake()
             }
             if (gamepad2.right_bumper) {
-                robot.arm.armToSpecimen1()
+                robot.arm.armToSpecimen()
             }
         }
     }

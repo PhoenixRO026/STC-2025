@@ -93,6 +93,11 @@ class Lift (
         }
     }
 
+    fun liftToBasket() = liftToPosAction(basketPos)
+    fun liftToBar() = liftToPosAction(barPos)
+    fun liftToBarUsedWithLift() = liftToPosAction(scoreBarPos)
+    fun liftDown() = liftToPosAction(0)
+
     fun addTelemetry(telemetry: Telemetry) {
         telemetry.addData("lift power", power)
     }
