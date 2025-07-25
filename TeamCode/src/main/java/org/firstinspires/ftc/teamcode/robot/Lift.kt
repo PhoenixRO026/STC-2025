@@ -31,6 +31,11 @@ class Lift (
         var targetPosTolerance = 20
     }// 525 is limit
 
+    val maxPos = 810
+    val basketPos = maxPos
+    val barPos = 300
+    val scoreBarPos = 200
+
     private var internalPower get() = rightMotor.power
         set(value) {
             leftMotor.power = value
